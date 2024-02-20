@@ -9,11 +9,11 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    let citiesArray: [City] = [City(name: "New York", timezone: TimeZone(identifier: "America/New_York")!)]
+    let citiesArray: [City] = [City(name: "New York", timezone: TimeZone(identifier: "America/New_York")!), City(name: "London", timezone: TimeZone(identifier: "Europe/London")!), City(name: "Moskow", timezone: TimeZone(identifier: "Europe/Moscow")!), City(name: "Minsk", timezone: TimeZone(identifier: "Europe/Minsk")!), City(name: "Tokyo", timezone: TimeZone(identifier: "Asia/Tokyo")!)]
     
     let tableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .blue
+        tableView.backgroundColor = .systemGray3
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(CityTableViewCell.self, forCellReuseIdentifier: CityTableViewCell.identifier)
         return tableView

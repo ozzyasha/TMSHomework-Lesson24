@@ -11,7 +11,14 @@ class CityTableViewCell: UITableViewCell {
     
     static let identifier = "CityTableViewCell"
     
-    let timezoneLabel: UILabel = {
+    let cityLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let timeLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -28,16 +35,28 @@ class CityTableViewCell: UITableViewCell {
     }
     
     private func setupUI() {
-        self.contentView.addSubview(timezoneLabel)
+        self.contentView.addSubview(cityLabel)
+        self.contentView.addSubview(timeLabel)
         
         NSLayoutConstraint.activate([
-            timezoneLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            timezoneLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+            cityLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            cityLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            timeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            timeLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
     }
     
     public func configure(city: City) {
-        self.timezoneLabel.text = "\(city.name) \(city.timezone.description)"
+        let date = Date()
+        let time = DateFormatter()
+        time.timeZone = city.timezone
+        time.dateFormat = "HH:mm:ss"
+        
+        self.cityLabel.text = "\(city.name)"
+        self.timeLabel.text = "\(time.string(from: date))"
     }
     
 }
